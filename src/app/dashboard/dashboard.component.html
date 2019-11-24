@@ -1,6 +1,32 @@
 <!-- Label to display any error messages -->
 <label class="error-message">{{ errMessage }}</label>
 
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Take a note</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>
+    <mat-form-field>
+      <input name="title" [(ngModel)]="note.title" matInput placeholder="Title">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea name="text" [(ngModel)]="note.text" matInput placeholder="Text"></textarea>
+    </mat-form-field>
+    </div>
+    <div><button mat-button [disabled]="toggle" (click)= "takeNote()" color="primary">Done</button></div>
+    <div><button mat-button (click)= "update_submit()" color="primary">Update Submit</button></div> 
+
+    </mat-expansion-panel>
+    
+
+<mat-card *ngFor="let item of notes">
+    <mat-card-title>{{item.title}}</mat-card-title>
+    <mat-card-content>{{item.text}}</mat-card-content>
+    <!-- <button mat-button (click)= "delete(item)" color="primary">Delete</button>
+    <button mat-button (click)= "update(item.id)" color="primary">Update</button> -->
+</mat-card>
+
+
 <!-- Expansion panel to add new notes -->
 
 
