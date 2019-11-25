@@ -14,7 +14,7 @@ export class AuthenticationService {
   }
 
   authenticateUser(data) {
-    return this.httpclient.post('http://localhost:3000/auth/v1', data);
+    return this.httpclient.post('http://localhost:3000/auth/v1/', data);
 
   }
 
