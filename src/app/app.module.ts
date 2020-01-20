@@ -19,17 +19,42 @@ import { CanActivateRouteGuard } from './can-activate-route.guard';
 import { AuthenticationService } from './services/authentication.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { NoteTakerComponent } from './note-taker/note-taker.component';
+import { NoteViewComponent } from './note-view/note-view.component';
+import { NoteComponent } from './note/note.component';
+import { EditnoteviewComponent } from './editnoteview/editnoteview.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditnoteComponent } from './editnote/editnote.component';
 
 
 const routes: Routes = [
-    { path: '', component : DashboardComponent,
-      canActivate : [CanActivateRouteGuard] },
+  {path:'',component:LoginComponent},
+    // { path: '', component : DashboardComponent,
+    //   canActivate : [CanActivateRouteGuard] },
     { path : 'login', component: LoginComponent },
-    { path : 'dashboard', component : DashboardComponent }
+    { path : 'dashboard', component : DashboardComponent,
+     children: [
+       {
+         path:'view/noteview',
+     component: NoteViewComponent
+       },
+       {
+         path:'',
+         redirectTo:'view/noteview',
+         pathMatch:'full'
+       },
+       {
+         path:'note/:noteId/edit',
+         component: EditnoteviewComponent,
+         outlet: 'noteEditOutlet'
+       }],
+       canActivate: [CanActivateRouteGuard]
+      
+    }
     // Will be activated by the login-guard to check user is authorised to access admin page.
 ];
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, LoginComponent, DashboardComponent],
+  declarations: [AppComponent, HeaderComponent, LoginComponent, DashboardComponent, NoteTakerComponent, NoteViewComponent, NoteComponent, EditnoteviewComponent, EditnoteComponent],
   imports: [RouterModule.forRoot(routes),
   BrowserModule,
   BrowserAnimationsModule,
@@ -41,9 +66,11 @@ const routes: Routes = [
   ReactiveFormsModule,
   HttpClientModule,
   MatToolbarModule,
-  MatExpansionModule],
+  MatExpansionModule,
+MatDialogModule],
   providers: [NotesService, RouterService, CanActivateRouteGuard, AuthenticationService],
-  bootstrap: [AppComponent ]
+  bootstrap: [AppComponent ],
+  entryComponents:[EditnoteComponent]
 })
 
 export class AppModule { }

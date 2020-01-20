@@ -1,0 +1,11 @@
+<div>
+  <mat-form-field>
+    <input name="title" [(ngModel)]="note.title" matInput placeholder="Title">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea name="text" [(ngModel)]="note.text" matInput placeholder="Text"></textarea>
+  </mat-form-field>
+  </div>
+  <div>
+    <button mat-button (click)= "saveNote()" color="primary">Save</button>
+  </div>

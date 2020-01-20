@@ -27,8 +27,8 @@ export class AuthenticationService {
   }
 
   isUserAuthenticated(token): Promise<boolean> {
-    return this.httpclient.post('http://localhost:3000/auth/v1/isAuthenticated', {},
-    {headers: new HttpHeaders().set(`Authorization`, `Bearer${token}`)}).map(response => response['isAuthenticated'])
+    return this.httpclient.post('http://localhost:3000/auth/v1/isAuthenticated',token,
+    {headers: new HttpHeaders().set(`Authorization`, `Bearer ${token}`)}).map(response => response['isAuthenticated'])
     .toPromise();
   }
 }
